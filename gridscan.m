@@ -3,13 +3,13 @@ fid = fopen('rbc_tile_test.xml', 'wt');
 fprintf(fid, '<temika>\n');
 
 % Define grid area
-x1 = [0,250];
-x2 = [0,750];
-x3 = [-10500,250];
-x4 = [-10500,750];
-fov_x = 295; % x FoV in microns absolute value
-fov_y = 250; % y Fov in microns absolute value
-led_intensity = 0.01;
+x1 = [0,0];
+x2 = [0,857];
+x3 = [-10076,0];
+x4 = [-10076,857];
+fov_x = 540; % x FoV in microns absolute value
+fov_y = 151; % y Fov in microns absolute value
+led_intensity = 0.35;
 overlap_x = 10; % number of microns to overlap adjacent fields of view
 overlap_y = 10;
 
