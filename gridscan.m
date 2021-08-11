@@ -1,17 +1,15 @@
-fid = fopen('rbc_tile_test.xml', 'wt');
+fid = fopen('rbc_tile_test_malaria.xml', 'wt');
 
 fprintf(fid, '<temika>\n');
 
 % Define grid area
-x1 = [0,250];
-x2 = [0,750];
-x3 = [-10500,250];
-x4 = [-10500,750];
-fov_x = 295; % x FoV in microns absolute value
-fov_y = 250; % y Fov in microns absolute value
-led_intensity = 0.01;
-overlap_x = 10; % number of microns to overlap adjacent fields of view
-overlap_y = 10;
+x1 = [0,0];
+x4 = [5000,5000];
+fov_x = 100; % x FoV in microns absolute value
+fov_y = 100; % y Fov in microns absolute value
+led_intensity = 0.35;
+overlap_x = 0; % number of microns to overlap adjacent fields of view
+overlap_y = 0;
 
 diagonal = x4 - x1;
 % +1 to make sure entire area is scanned because floor rounds to neg infinity and part of the area is lost
@@ -34,13 +32,12 @@ for ii=1:x_steps
     y_positions = fliplr(y_positions); % This is to make the scan not return all the way back and waste time.
     for jj=1:y_steps
         move_absolute(fid, x_positions(ii), y_positions(jj));
-        sleep(fid,0.2);
+        sleep(fid,0.1);
         basename = strcat(pwd,['/X_',num2str(x_positions(ii))],['.Y_',num2str(y_positions(jj)),'.']);
-        record(fid, 3, basename);
+        record_frame_malaria(fid, basename);
     end
 end
         
-
 set_illumination(fid, 3, 0.01, 'OFF');
 fprintf(fid, '</temika>');
 fclose(fid);
